@@ -2,10 +2,10 @@
 
 namespace Engelsystem\EventSpecific;
 
-use Engelsystem\Container\ServiceProvider;
+use Engelsystem\Container\ServiceProvider as BaseServiceProvider;
 use Engelsystem\Helpers\Translation\Translator as EngelsystemTranslator;
 
-class TranslationServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
