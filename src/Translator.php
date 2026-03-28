@@ -1,45 +1,79 @@
 <?php
 
-namespace Engelsystem\EventSpecific;
+declare(strict_types=1);
+
+namespace Engelsystem\Plugins\TranslationMapper;
 
 use Engelsystem\Helpers\Translation\Translator as EngelsystemTranslator;
 
 class Translator extends EngelsystemTranslator
 {
-    /** @var array */
-    protected $replacements = [
+    protected array $replacements = [
         // EN
-        'Angeltypes' => 'Daemontypes',
-        'angeltypes' => 'daemontypes',
-        'Angeltype'  => 'Daemontype',
-        'Angels'     => 'Daemons',
-        'angels'     => 'daemons',
-        'Angel'      => 'Daemon',
-        'Heaven'     => 'Hell',
-        'helpers'    => 'daemons',
-        'helper'     => 'daemon',
+        'Angel types' => 'Daemon types',
+        'angel types' => 'daemon types',
+        'Angel type' => 'Daemon type',
+        'Angels' => 'Daemons',
+        'angels' => 'daemons',
+        'Angel' => 'Daemon',
+        'Heaven' => 'Hell',
+        'helpers' => 'daemons',
+        'helper' => 'daemon',
 
         // DE
         'Engeltypen' => 'Dämonarten',
-        'Engeltyp'   => 'Dämonart',
-        'Engel'      => 'Dämonen',
+        'Engeltyp' => 'Dämonart',
+        'Engel' => 'Dämonen',
         'den Himmel' => 'die Hölle',
-        'Himmel'     => 'Hölle',
-        'Helfer'     => 'Dämonen',
+        'Himmel' => 'Hölle',
+        'Helfer' => 'Dämonen',
     ];
 
-    /**
-     * @param string $text
-     * @param array  $replace
-     *
-     * @return mixed|string
-     */
-    protected function replaceText(string $text, array $replace = [])
+    /** @noinspection PhpMissingParentConstructorInspection */
+    public function __construct(protected EngelsystemTranslator $translator)
     {
-        $text = parent::replaceText($text, $replace);
+    }
 
-        $text = str_replace(array_keys($this->replacements), array_values($this->replacements), $text);
+    public function translate(string $key, array $replace = []): string
+    {
+        return $this->replaceContent($this->translator->translate($key, $replace));
+    }
 
-        return $text;
+    public function translatePlural(string $key, string $pluralKey, int $number, array $replace = []): string
+    {
+        return $this->replaceContent($this->translator->translatePlural($key, $pluralKey, $number, $replace));
+    }
+
+    /**
+     * Replace the given words with their counterparts
+     */
+    protected function replaceContent(string $value): string
+    {
+        return str_replace(array_keys($this->replacements), array_values($this->replacements), $value);
+    }
+
+    public function getLocale(): string
+    {
+        return $this->translator->getLocale();
+    }
+
+    public function setLocale(string $locale): void
+    {
+        $this->translator->setLocale($locale);
+    }
+
+    public function getLocales(): array
+    {
+        return $this->translator->getLocales();
+    }
+
+    public function hasLocale(string $locale): bool
+    {
+        return $this->translator->hasLocale($locale);
+    }
+
+    public function setLocales(array $locales): void
+    {
+        $this->translator->setLocales($locales);
     }
 }

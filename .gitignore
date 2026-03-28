@@ -1,0 +1,25 @@
+# Generic cache files
+*~
+.~*
+*.tmp
+*.temp
+*.DS_Store
+.*.swp
+*.out
+*.cache
+Thumbs.db
+.project
+.buildpath
+.settings
+_vimrc_local.vim
+
+# IDE & dev env files
+/flake.nix
+/flake.lock
+/.devcontainer
+/.idea/
+/.phpstorm.meta.php
+/.vscode
+
+# Composer files
+/vendor/

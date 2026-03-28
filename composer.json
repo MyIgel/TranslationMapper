@@ -1,0 +1,23 @@
+{
+  "type": "engelsystem-plugin",
+  "name": "engelsystem/trnslation-mapper",
+  "description": "Replaces Engelsystem texts",
+  "version": "0.3.0",
+  "license": "LGPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Igor Scheller",
+      "email": "igor.scheller@igorshp.de"
+    }
+  ],
+  "extra": {
+    "providers": [
+      "Engelsystem\\Plugins\\TranslationMapper\\ServiceProvider"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Engelsystem\\Plugins\\TranslationMapper": "src/"
+    }
+  }
+}
